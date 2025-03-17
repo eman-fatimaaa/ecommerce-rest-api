@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/eman-fatimaaa/ecommerce-rest-api/issues"
   },
-  "homepage": "https://github.com/eman-fatimaaa/ecommerce-rest-api#readme"
+  "homepage": "https://github.com/eman-fatimaaa/ecommerce-rest-api#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
