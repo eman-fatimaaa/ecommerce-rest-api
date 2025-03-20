@@ -1,12 +1,15 @@
 const express = require("express")
 const router = express.Router()
+const { hashPassword } = require("../middleware/passencrypt")
 
 router.get('/', (req, res) => {
     res.send('Users page')
 })
 
-router.post('/', (req, res) => {
-    res.send('you have reached the POST request !')
+router.post('/', hashPassword, (req, res) => {
+    const { firstName, email } = req.body
+    const hashedPassword = req.hashedPassword
+    res.json({firstName, email, hashedPassword})
 })
 
 module.exports = router

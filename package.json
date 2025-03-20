@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "## Overview This project is an **E-commerce REST API** designed to support an online shopping platform. It provides functionalities for user management, product management, cart and checkout, and order processing. The API follows RESTful principles and ensures security through authentication and authorization mechanisms.",
   "main": "index.js",
- "scripts": {
-  "start": "node index.js",
-  "dev": "nodemon index.js"
-},
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eman-fatimaaa/ecommerce-rest-api.git"
@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/eman-fatimaaa/ecommerce-rest-api#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
