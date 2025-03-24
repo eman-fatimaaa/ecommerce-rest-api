@@ -1,19 +1,20 @@
-require("dotenv").config();
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-// Ensure NODE_ENV is defined and correctly interpreted
-const isProduction = process.env.NODE_ENV === "production";
+const connectDB = async () => {
+  try {
+    const uri = process.env.MONGODB_URI;
+    if (!uri) {
+      throw new Error("MONGODB_URI is not defined in environment variables");
+    }
 
-// Use the correct database URI
-const uri = isProduction ? process.env.DB_CONNECTION : process.env.LOCAL_DB_CONNECTION;
+    await mongoose.connect(uri);
+    console.log("MongoDB Connected...");
+  } catch (err) {
+    console.error("No DB connection!", err.message);
+    // Exit process with failure
+    process.exit(1);
+  }
+};
 
-if (!uri) {
-    throw new Error("Database connection URI is missing. Check your .env file.");
-}
-
-// mongoose.set("strictQuery", true);
-
-const mongoConnection = uri;
-mongoose.set("strictQuery", true)
-
-module.exports = mongoConnection;
+module.exports = connectDB;

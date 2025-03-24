@@ -1,15 +1,15 @@
 const express = require("express")
 const router = express.Router()
 const { hashPassword } = require("../middleware/passencrypt")
+const { userLogIn, userSignUp } = require("../controllers/userControllers")
+
+
 
 router.get('/', (req, res) => {
     res.send('Users page')
 })
+router.get("/", userLogIn)
 
-router.post('/', hashPassword, (req, res) => {
-    const { firstName, email } = req.body
-    const hashedPassword = req.hashedPassword
-    res.json({firstName, email, hashedPassword})
-})
 
+router.post("/signup",hashPassword, userSignUp);
 module.exports = router

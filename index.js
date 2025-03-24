@@ -4,6 +4,8 @@ const port = process.env.PORT || 3000;
 const router = require("./routes/users");
 
 const connectDB = require("./utils/db");
+connectDB();
+
 
 
 // CORS middleware
