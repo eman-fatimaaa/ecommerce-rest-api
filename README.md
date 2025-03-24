@@ -50,3 +50,7 @@ This project is an **E-commerce REST API** designed to support an online shoppin
    git clone https://github.com/your-username/ecommerce-api.git
    cd ecommerce-api
 
+### Link to the deployed version using render
+https://ecommerce-rest-api-miv1.onrender.com/api/users/
+
+
