@@ -5,9 +5,9 @@ const { userLogIn, userSignUp } = require("../controllers/userControllers")
 
 
 
-router.get('/', (req, res) => {
-    res.send('Users page')
-})
+// router.get('/', (req, res) => {
+//     res.send('Users page')
+// })
 router.get("/", userLogIn)
 
 
