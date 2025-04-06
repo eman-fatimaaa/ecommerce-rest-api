@@ -1,15 +1,39 @@
 const express = require("express")
 const router = express.Router()
-const { hashPassword } = require("../middleware/passencrypt")
-const { userLogIn, userSignUp } = require("../controllers/userControllers")
+const path = require("path");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const { userSignUp, createUser, userLogin } = require("../controllers/userController");
+const { hashPassword } = require("../middleware/passencrypt");
+const User = require("../models/userModels");
+const auth = require("../middleware/auth");
 
 
+router.post("/signup", hashPassword, userSignUp);
+router.post("/login", userLogin);
+router.get("/form", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
-// router.get('/', (req, res) => {
-//     res.send('Users page')
-// })
-router.get("/", userLogIn)
+// Protected routes
+router.get("/", auth, async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
+router.post("/create", auth, hashPassword, createUser);
 
-router.post("/signup",hashPassword, userSignUp);
-module.exports = router
+router.get("/me", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+module.exports = router;
