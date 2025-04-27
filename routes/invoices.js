@@ -10,10 +10,13 @@ const auth = require('../middleware/auth');
 
 // Protect all invoice routes
 router.use(auth);
-
+// Regular user routes
 router.post("/", createInvoice);
 router.get("/", getInvoices);
 router.get("/:id", getInvoiceById);
 router.patch("/:id/status", updateInvoiceStatus);
+// Admin only routes
+router.get("/", adminAuth, getInvoices);  // Only admins can see all invoices
+router.patch("/:id/status", adminAuth, updateInvoiceStatus);  // Only admins can update status
 
 module.exports = router;
