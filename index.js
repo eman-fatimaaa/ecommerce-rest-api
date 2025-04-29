@@ -7,7 +7,14 @@ const cors = require('cors');
 const connectDB = require("./utils/db");
 connectDB();
 
-
+app.use(cors({
+  origin: [
+    'https://ecomm-ef.netlify.app',  // Your Netlify frontend URL
+    'http://localhost:3000'                  // For local testing
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true  // Enable if using cookies/auth
+}));
 
 // CORS middleware
 // app.use((req, res, next) => {
@@ -18,11 +25,8 @@ connectDB();
 //   );
 //   next();
 // });
-app.use(cors({
-  origin: 'https://shimmering-parfait-60e480.netlify.app', // your real Netlify URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true
-}));
+// Configure CORS for Netlify frontend
+
 
 // Middleware
 app.use(express.json());
