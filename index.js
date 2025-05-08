@@ -19,7 +19,7 @@ connectDB();
 //   next();
 // });
 app.use(cors({
-  origin: 'https://shimmering-parfait-60e480.netlify.app', // your real Netlify URL
+  origin: 'adorable-cactus-61f538.netlify.app', // your real Netlify URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
