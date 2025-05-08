@@ -19,7 +19,7 @@ connectDB();
 //   next();
 // });
 app.use(cors({
-  origin: 'adorable-cactus-61f538.netlify.app', // your real Netlify URL
+  origin: ['https://adorable-cactus-61f538.netlify.app ','https://app.netlify.com/sites/adorable-cactus-61f538/deploys/681cb442013c8663dc81f755','https://app.netlify.com/sites/adorable-cactus-61f538/logs/functions','https://app.netlify.com/sites/adorable-cactus-61f538/logs/edge-functions','https://681cb442013c8663dc81f755--adorable-cactus-61f538.netlify.app '], // your real Netlify URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
