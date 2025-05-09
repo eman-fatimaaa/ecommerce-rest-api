@@ -1,21 +1,13 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-const userRouter = require("./routes/users");
-const productRouter = require("./routes/products");
+const router = require("./routes/users");
 const cors = require('cors');
 
 const connectDB = require("./utils/db");
 connectDB();
 
-app.use(cors({
-  origin: [
-    'https://ecomm-ef.netlify.app',  // Your Netlify frontend URL
-    'http://localhost:3000'                  // For local testing
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true  // Enable if using cookies/auth
-}));
+
 
 // CORS middleware
 // app.use((req, res, next) => {
@@ -26,8 +18,14 @@ app.use(cors({
 //   );
 //   next();
 // });
-// Configure CORS for Netlify frontend
-
+app.use(cors({
+  origin: [
+    "https://adorable-cactus-61f538.netlify.app",
+    "http://localhost:5173"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
 
 // Middleware
 app.use(express.json());
@@ -43,7 +41,7 @@ const saltRounds = 10; // how many times the password is hashed
 exports.hashPassword = (req, res, next) => {
   bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
     if (err) {
-      return res.status(500).json({ error: "Error hashing password" });
+      return res.status(500).json({ error: "Error hashing passwords" });
     }
     req.hashedPassword = hash;
     console.log("Your hashed password:", hash);
@@ -53,9 +51,9 @@ exports.hashPassword = (req, res, next) => {
 
 const { hashPassword } = require("./middleware/passencrypt");
 
-// Routes
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
+// Route for /api/users
+app.use("/api/users", router);
+app.use("/api/products", router);
 
 app.get("/", (req, res) => {
   res.send("Welcome to my API! e-commerce backend 🤳");
