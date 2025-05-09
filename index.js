@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-const router = require("./routes/users");
+const userRouter = require("./routes/users");
+const productRouter = require("./routes/products");
 const cors = require('cors');
 
 const connectDB = require("./utils/db");
@@ -52,8 +53,8 @@ exports.hashPassword = (req, res, next) => {
 const { hashPassword } = require("./middleware/passencrypt");
 
 // Route for /api/users
-app.use("/api/users", router);
-app.use("/api/products", router);
+app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to my API! e-commerce backend 🤳");
